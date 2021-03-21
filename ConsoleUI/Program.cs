@@ -13,9 +13,11 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
+            UserManager userManager = new UserManager(new EfUserDal());
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            RentalMenager rentalMenager = new RentalMenager(new EfRentalDal());
 
-
-            // Core.Utilities.IResult result = CarResultAdd(carManager);
+            //Core.Utilities.IResult result = CarResultAdd(carManager);
             // CarResultGetDetails(carManager);
             // CarResultDelete(carManager);
             // CarResultUpdate(carManager);
@@ -31,6 +33,58 @@ namespace ConsoleUI
             // BrandResultDelete(brandManager);
             // BrandResultGetAll(brandManager);
 
+
+            //UserAdd(userManager);
+
+            //CustomerAdd(customerManager);
+
+             RentalAdd(rentalMenager);
+
+          //  rentalMenager.Delete(new Rental { Id = 2 });
+
+
+
+        }
+
+        private static void RentalAdd(RentalMenager rentalMenager)
+        {
+            var result = rentalMenager.Add(new Rental { CarId = 1, CustomerId = 1, RentDate = new DateTime(2021, 02, 01, 10, 30, 0), ReturnDate = new DateTime(2021, 02, 07, 10, 30, 0) });
+
+            if (result.Success == true)
+            {
+                Console.WriteLine(result.Message);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void CustomerAdd(CustomerManager customerManager)
+        {
+            var result21 = customerManager.Add(new Customer { CompanyName = "Pirelli Lastik" });
+            if (result21.Success == true)
+            {
+                Console.WriteLine(result21.Message);
+            }
+        }
+
+        private static void UserAdd(UserManager userManager)
+        {
+            var result20 = userManager.GetAll();
+
+            if (result20.Success == true)
+            {
+                foreach (var user in result20.Data)
+                {
+                    Console.WriteLine("FisrtName : " + " / " + user.FirstName + " / " + "LastName : " + user.LastName + " / " + "Email : " + " / " + user.Email);
+                }
+
+            }
+            else
+            {
+                Console.WriteLine(result20.Message);
+            }
         }
 
         private static void BrandResultGetAll(BrandManager brandManager)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAccess
+namespace DataAccsess
 {
     class Program
     {
